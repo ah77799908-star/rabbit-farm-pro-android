@@ -204,6 +204,6 @@ javac -encoding UTF-8 -source 8 -target 8 -cp "$AJ" -d "$W/cls" $(find "$S/src" 
 cp "$W/base.apk" "$W/un.apk"; (cd "$W" && zip -q un.apk classes.dex)
 "$BT/zipalign" -f 4 "$W/un.apk" "$W/al.apk"
 [ -f "$KS" ] || keytool -genkeypair -keystore "$KS" -alias "$ALIAS" -keyalg RSA -keysize 2048 -validity 10000 -storepass "$KS_PASS" -keypass "$KS_PASS" -dname "CN=Rabbit Farm Pro"
-"$BT/apksigner" sign --ks "$KS" --ks-alias "$ALIAS" --ks-pass env:KS_PASS --out rabbit-farm-pro.apk "$W/al.apk"
+"$BT/apksigner" sign --ks "$KS" --ks-key-alias "$ALIAS" --ks-pass env:KS_PASS --out rabbit-farm-pro.apk "$W/al.apk"
 "$BT/apksigner" verify -v rabbit-farm-pro.apk | head -3
 echo "built: $(pwd)/rabbit-farm-pro.apk"
